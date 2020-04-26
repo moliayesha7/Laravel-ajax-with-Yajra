@@ -126,6 +126,18 @@
 					if (name == '' || roll == '' || age == '' || cell == '') {
 						$('.notification').html('<p class="alert alert-danger">All fields are required!<button class="close" data-dismiss="alert">&times;</button</p>');
 					} else {
+					//$ajax request for student add
+						$.ajax({
+							url:'{{route("student.store")}}',
+							method:'POST',
+							data:new FormData(this),
+							contentType:false,
+							processData:false,
+							success:function(data){
+								alert(data);
+							}
+
+						});
 						$('.notification').html('<p class="alert alert-success"> New Student Added <button class="close" data-dismiss="alert">&times;</button</p>');
 					}
 

@@ -34,7 +34,7 @@ class StudentManagement extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "ami aste perrci";
     }
 
     /**
