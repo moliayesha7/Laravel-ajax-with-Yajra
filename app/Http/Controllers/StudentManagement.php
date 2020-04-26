@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Student;
 class StudentManagement extends Controller
 {
     /**
@@ -34,7 +34,25 @@ class StudentManagement extends Controller
      */
     public function store(Request $request)
     {
-        echo "ami aste perrci";
+        //first check je controller access korte parsi kina
+        //echo "ami aste perrci";
+
+        //check data pai kina
+        //echo $request->sname;
+
+
+       Student::create([
+
+        'sname'  => $request ->sname,
+        'sroll' => $request -> sroll,
+        'scell' => $request -> scell,
+        'sage' => $request -> sage
+
+
+       ]);
+
+
+
     }
 
     /**

@@ -29,6 +29,7 @@
 
 						</div>
 						<form id="add-student-form" action="" method="POST">
+							@csrf
 							<div class="form-group">
 								<label for="">Student Name</label>
 								<input name="sname" class="form-control" type="text">
@@ -134,7 +135,7 @@
 							contentType:false,
 							processData:false,
 							success:function(data){
-								alert(data);
+								$('form#add-student-form')[0].reset();
 							}
 
 						});
