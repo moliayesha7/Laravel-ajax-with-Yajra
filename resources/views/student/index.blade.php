@@ -65,6 +65,7 @@
 		<table id="student-table" class="table">
 			<thead>
 				<tr>
+					<th>Id</th>
 					<th>Student Name</th>
 					<th>Student Roll</th>
 					<th>Age</th>
@@ -72,15 +73,7 @@
 					<th>Action</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr>
-					<td>Ayesha</td>
-					<td>123456</td>
-					<td>23</td>
-					<td>01913212321</td>
-					<td></td>
-				</tr>
-			</tbody>
+			
 		</table>
 	</div>
 
@@ -110,7 +103,39 @@
 					$('#add-student-modal').modal('show');
 				});
 				//make yajra table
-				$('table#student-table').DataTable();
+				$('table#student-table').DataTable({
+					serverSide:true,
+					ajax:{
+						url:'{{route("student.index")}}',
+					},
+					columns:[
+						{
+							data:'id',
+							name:'id'
+						},
+						{
+							data:'sname',
+							name:'sname'
+						},
+						{
+							data:'sroll',
+							name:'sroll'
+						},
+						{
+							data:'scell',
+							name:'scell'
+						},
+						{
+							data:'sage',
+							name:'sage'
+						},
+						{
+							data:'action',
+							name:'action'
+						}
+						
+					]
+				});
 
 
 
@@ -136,6 +161,7 @@
 							processData:false,
 							success:function(data){
 								$('form#add-student-form')[0].reset();
+								$('table#student-table').DataTable().ajax.reload();
 							}
 
 						});

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Student;
+use DataTables;
+
 class StudentManagement extends Controller
 {
     /**
@@ -11,8 +13,19 @@ class StudentManagement extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $val)
     {
+        if ($val->ajax()) {
+            $data = Student::latest()->get();
+            return DataTables::of($data)->addColumn('action', function ($data) {
+                $button='<button class="btn btn-sm btn-info">View</button>
+                <button class="btn btn-sm btn-warning">Edit</button>
+                <button class="btn btn-sm btn-danger">Delete</button>';
+
+                return $button;
+            })->rawColumns(['action'])->make(true);
+        }
+
         return view('student.index');
     }
 
@@ -41,18 +54,15 @@ class StudentManagement extends Controller
         //echo $request->sname;
 
 
-       Student::create([
+        Student::create([
 
-        'sname'  => $request ->sname,
-        'sroll' => $request -> sroll,
-        'scell' => $request -> scell,
-        'sage' => $request -> sage
-
-
-       ]);
+            'sname'  => $request->sname,
+            'sroll' => $request->sroll,
+            'scell' => $request->scell,
+            'sage' => $request->sage
 
 
-
+        ]);
     }
 
     /**
